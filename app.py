@@ -13,6 +13,7 @@ import numpy as np
 #import gtd data
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
+group_name = df['group']
 group_list = list(df['group'].value_counts().sort_index().index)
 
 ########### Initiate the app
@@ -48,6 +49,25 @@ app.layout = html.Div(children=[
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
 ])
 
+### app callback #1
+
+@app.callback(dash.dependencies.Output('group_map', 'figure'),
+              [dash.dependencies.Input('dropdown', 'value')])
+def group_filter(group_id):
+    df['selected']=np.where(df['group']==group_id, 1, 0)
+    fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
+                  fig.update_layout(mapbox_style="stamen-terrain",
+                  mapbox_center_lon=0,
+                  mapbox_center_lat=0,
+                  mapbox_zoom=1,
+                 )
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    return fig
+
+
+
+  
+  
 
 ######### Run the app #########
 if __name__ == '__main__':
