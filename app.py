@@ -13,7 +13,6 @@ import numpy as np
 #import gtd data
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
-group_list = df['group'].value_counts().sort_index().index
 
 
 ########### Initiate the app
