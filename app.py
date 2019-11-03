@@ -13,9 +13,8 @@ import numpy as np
 #import gtd data
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
-country_list = df['country'].value_counts().sort_index().index
 group_list = df['group'].value_counts().sort_index().index
-num_killed = df['killed'].value_counts().sort_index().index
+
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
