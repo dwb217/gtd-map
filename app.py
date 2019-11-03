@@ -10,9 +10,16 @@ import plotly.graph_objs as go
 from plotly.graph_objs import *
 import numpy as np
 
+
 #import gtd data
 
 df = pd.read_csv('gtd.csv')
+
+########### Initiate the app
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+app.title='Terrorism'
 
 ########## Define the figure
 
@@ -24,10 +31,13 @@ fig.update_layout(mapbox_style="stamen-terrain",
                  )
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
+
+
+
 ########### Set up the layout
 
 app.layout = html.Div(children=[
-    html.H1('Terrorist attacks'),
+    html.H1('Terrorism 2002-2018'),
     html.Div([
         dcc.Graph(id='figure-1', figure=fig),
         html.A('Code on Github', href='https://github.com/dwb217/dash-density-heatmap'),
