@@ -10,9 +10,7 @@ import plotly.graph_objs as go
 from plotly.graph_objs import *
 import numpy as np
 
-
 #import gtd data
-
 df = pd.read_csv('gtd-2018.csv')
 
 ########### Initiate the app
@@ -31,9 +29,6 @@ fig.update_layout(mapbox_style="stamen-terrain",
                  )
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
-
-
-
 ########### Set up the layout
 
 app.layout = html.Div(children=[
@@ -45,7 +40,6 @@ app.layout = html.Div(children=[
         html.A('Source:', href='https://plot.ly/python/mapbox-density-heatmaps')
     ])
 ])
-
 
 
 ######### Run the app #########
