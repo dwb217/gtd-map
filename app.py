@@ -63,8 +63,8 @@ def group_picker(group_id):
                   mapbox_center_lat=0,
                   mapbox_zoom=1,
                  )
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-return fig
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    return fig
 
 
   
