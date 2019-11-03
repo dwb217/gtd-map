@@ -37,8 +37,7 @@ app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
     dcc.Dropdown(
         id='dropdown',
-        options=[{'label': i, 'value': i} for i in group_list],
-        value=group_list[0]
+        options=[{'label': i, 'value': i} for i in group_list]
     ),
     dcc.Graph(id='figure-1', figure=fig),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
