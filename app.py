@@ -17,7 +17,7 @@ country_list=list(df['country'].value_counts().sort_index().index)
 
 ########## Define the figure
 
-fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['fatalities'], radius=10))
+fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['killed'], radius=5))
 fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
