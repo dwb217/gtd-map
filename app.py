@@ -36,9 +36,9 @@ app.layout = html.Div(children=[
     html.H1('Terrorism 2002-2018'),
     html.Div([
         dcc.Graph(id='figure-1', figure=fig),
-        html.A('Code on Github', href='https://github.com/dwb217/dash-density-heatmap'),
+        html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
         html.Br(),
-        html.A('Source:', href='https://plot.ly/python/mapbox-density-heatmaps')
+        html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
     ])
 ])
 
