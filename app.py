@@ -13,9 +13,9 @@ import numpy as np
 #import gtd data
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
-country_list = df['country'].value_counts().sort_index().index)
-group_list = df['group'].value_counts().sort_index().index)
-num_killed = df['killed'].value_counts().sort_index().index)
+country_list = df['country'].value_counts().sort_index().index
+group_list = df['group'].value_counts().sort_index().index
+num_killed = df['killed'].value_counts().sort_index().index
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -38,6 +38,11 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 app.layout = html.Div([
     html.H1('Terrorist Attacks: 2002-2018'),
+    dcc.Dropdown(
+      id='dropdown',
+      options=[{'label': i, 'value': i} for i in group_list],
+      value=options_list[10]
+      ),
     html.Br(),
     dcc.Graph(id='figure-1', figure=fig),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
