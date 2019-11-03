@@ -14,7 +14,6 @@ import numpy as np
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
 
-
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -36,12 +35,10 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
-    html.Br(),
     dcc.Graph(id='figure-1', figure=fig),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
-    ])
 ])
 
 
