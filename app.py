@@ -12,6 +12,7 @@ import numpy as np
 
 #import gtd data
 df = pd.read_csv('gtd.csv')
+total_attacks = df['eventid'].value_counts()
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -21,7 +22,7 @@ app.title='Terrorism'
 
 ########## Define the figure
 
-fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['killed'], radius=5))
+fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
 fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
