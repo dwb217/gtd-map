@@ -41,7 +41,8 @@ app.layout = html.Div(children=[
     html.Div([
         dcc.Dropdown(
            id='dropdown',
-           options=[{'label': i, 'value': i} for i in group_list]
+           options=[{'label': i, 'value': i} for i in group_list],
+           value=options_list[10]
     ),
         html.Br(),
         dcc.Graph(id='figure-1', figure=fig),
