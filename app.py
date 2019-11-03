@@ -11,7 +11,7 @@ from plotly.graph_objs import *
 import numpy as np
 
 #import gtd data
-df = pd.read_csv('gtd-2018.csv')
+df = pd.read_csv('gtd.csv')
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
