@@ -33,7 +33,7 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 ########### Set up the layout
 
 app.layout = html.Div(children=[
-    html.H1('Terrorism 2002-2018'),
+    html.H1('Terrorist Attacks: 2002-2018'),
     html.Div([
         dcc.Graph(id='figure-1', figure=fig),
         html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
