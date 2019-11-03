@@ -13,6 +13,7 @@ import numpy as np
 #import gtd data
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
+group_list = list(df['group'].value_counts().sort_index().index)
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -21,7 +22,6 @@ server = app.server
 app.title='Terrorism'
 
 ########## Define the figure
-
 
 fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
 fig.update_layout(mapbox_style="stamen-terrain",
@@ -35,6 +35,11 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
+    dcc.Dropdown(
+        id='dropdown',
+        options=[{'label': i, 'value': i} for i in group_list],
+        value=group_list[0]
+    ),
     dcc.Graph(id='figure-1', figure=fig),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
