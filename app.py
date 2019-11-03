@@ -13,7 +13,6 @@ import numpy as np
 #import gtd data
 
 df = pd.read_csv('gtd.csv')
-country_list=list(df['country'].value_counts().sort_index().index)
 
 ########## Define the figure
 
