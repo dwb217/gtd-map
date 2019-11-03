@@ -44,7 +44,7 @@ app.layout = html.Div(children=[
         id='dropdown',
         options=[{'label': i, 'value': i} for i in group_list]
     ),
-    dcc.Graphic(id='group-display),
+    dcc.Graphic(id='group-display'),
     html.Br(),            
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
