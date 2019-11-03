@@ -36,7 +36,7 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
     html.Br(),
-    html.A('Filter by group:'),
+    html.H3('Filter by group:'),
     html.Br(),
     dcc.Dropdown(
         id='dropdown',
