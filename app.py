@@ -36,19 +36,18 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 ########### Set up the layout
 
-app.layout = html.Div(children=[
+app.layout = html.Div([
     html.H1('Terrorist Attacks: 2002-2018'),
-    html.Div([
-        dcc.Dropdown(
-           id='dropdown',
-           options=[{'label': i, 'value': i} for i in group_list],
-           value=options_list[10]
-    ),
-        html.Br(),
-        dcc.Graph(id='figure-1', figure=fig),
-        html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
-        html.Br(),
-        html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
+    dcc.Dropdown(
+      id='dropdown',
+      options=[{'label': i, 'value': i} for i in group_list],
+      value=options_list[10]
+      ),
+    html.Br(),
+    dcc.Graph(id='figure-1', figure=fig),
+    html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
+    html.Br(),
+    html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
     ])
 ])
 
