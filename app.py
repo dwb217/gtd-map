@@ -36,6 +36,7 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
+    dcc.Graph(id='figure-1', figure=fig),
     html.Br(),
     html.H3('Filter by group:'),
     html.Br(),
@@ -43,7 +44,8 @@ app.layout = html.Div(children=[
         id='dropdown',
         options=[{'label': i, 'value': i} for i in group_list]
     ),
-    dcc.Graph(id='figure-1', figure=fig),
+    dcc.Graphic(id='group-display),
+    html.Br(),            
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
@@ -51,19 +53,18 @@ app.layout = html.Div(children=[
 
 ### app callback #1
 
-@app.callback(dash.dependencies.Output('group_map', 'figure'),
+@app.callback(dash.dependencies.Output('group_display', 'figure'),
               [dash.dependencies.Input('dropdown', 'value')])
-def group_filter(group_id):
-    df['selected']=np.where(df['group']==group_id, 1, 0)
-    fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
-                  fig.update_layout(mapbox_style="stamen-terrain",
+def group_picker(group_id):
+    group_df=df[df['group']==group_id]
+    fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks['dropdown'], radius=5))
+    fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
                   mapbox_zoom=1,
                  )
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    return fig
-
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+return fig
 
 
   
