@@ -22,6 +22,13 @@ app.title='Terrorism'
 
 ########## Define the figure
 
+fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
+fig.update_layout(mapbox_style="stamen-terrain",
+                  mapbox_center_lon=0,
+                  mapbox_center_lat=0,
+                  mapbox_zoom=1,
+                 )
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['killed'], radius=5))
 fig.update_layout(mapbox_style="stamen-terrain",
@@ -37,6 +44,7 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
     dcc.Graph(id='figure-1', figure=fig),
+    dcc.Graph(id='figure-2', figure=fig),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
