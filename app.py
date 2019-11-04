@@ -23,7 +23,7 @@ app.title='Terrorism'
 ########## Define the figure
 
 
-fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
+fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['killed'], radius=5))
 fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
@@ -31,13 +31,6 @@ fig.update_layout(mapbox_style="stamen-terrain",
                  )
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
-fig2 = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['killed'], radius=5))
-fig2.update_layout(mapbox_style="stamen-terrain",
-                  mapbox_center_lon=0,
-                  mapbox_center_lat=0,
-                  mapbox_zoom=1,
-                 )
-fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
 ########### Set up the layout
 
