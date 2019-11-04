@@ -57,7 +57,7 @@ app.layout = html.Div(children=[
               [dash.dependencies.Input('dropdown', 'value')])
 def group_picker(group_id):
     group_df=df[df['group']==group_id]
-    fig = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=total_attacks, radius=5))
+    fig = go.Figure(go.Densitymapbox(lat=group_df['latitude'], lon=group_df['longitude'], z=total_attacks, radius=5))
     fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
@@ -65,9 +65,6 @@ def group_picker(group_id):
                  )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig
-
-
-  
   
 
 ######### Run the app #########
