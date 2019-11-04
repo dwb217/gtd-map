@@ -37,8 +37,6 @@ fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
     dcc.Graph(id='figure-1', figure=fig),
-    html.Br(),
-    dcc.Graph(id='figure-1', figure=fig2),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
