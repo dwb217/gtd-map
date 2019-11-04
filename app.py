@@ -31,11 +31,20 @@ fig.update_layout(mapbox_style="stamen-terrain",
                  )
 fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
+fig2 = go.Figure(go.Densitymapbox(lat=df['latitude'], lon=df['longitude'], z=df['killed'], radius=5))
+fig2.update_layout(mapbox_style="stamen-terrain",
+                  mapbox_center_lon=0,
+                  mapbox_center_lat=0,
+                  mapbox_zoom=1,
+                 )
+
 ########### Set up the layout
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
     dcc.Graph(id='figure-1', figure=fig),
+    html.Br(),
+    dcc.Graph(id='figure-1', figure=fig2),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
