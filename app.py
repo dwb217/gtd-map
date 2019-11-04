@@ -56,9 +56,7 @@ app.layout = html.Div(children=[
 @app.callback(dash.dependencies.Output('group_display', 'figure'),
               [dash.dependencies.Input('dropdown', 'value')])
 def group_picker(group_id):
-    group_df=df[df['group']==group_id]
-    print(group_id)
-    return group_id
+    group_df=df['group']==group_id
   
 
 ######### Run the app #########
