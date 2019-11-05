@@ -7,6 +7,7 @@ import dash_html_components as html
 import pandas as pd
 import plotly as py
 import numpy as np
+import dash_table
 
 #import gtd data
 df = pd.read_csv('gtd.csv')
@@ -61,6 +62,18 @@ def group_picker(group_id):
                  )
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig
+
+# ### app callback #1
+# @app.callback(dash.dependencies.Output('country-display', 'figure'),
+#               [dash.dependencies.Input('dropdown1', 'value')])
+# def country_picker(country_id):
+#     country_df=df[df['country']==country_id]
+#     fig = dash_table.DataTable(
+#             id='country',
+#             columns=[{"group": i, "killed": i} for i in df.columns],
+#             data=df.to_dict('country'),
+#         )
+#     return fig
 
 
 # ### app callback #1
