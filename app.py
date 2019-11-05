@@ -6,17 +6,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 import plotly as py
-import plotly.graph_objs as go
-from plotly.graph_objs import *
 import numpy as np
-import seaborn as sns
 
 #import gtd data
 df = pd.read_csv('gtd.csv')
 total_attacks = df['eventid'].value_counts()
 group_name = df['group']
 group_list = list(df['group'].value_counts().sort_index().index)
-country_list = df['country']
+country_list = list(df['country'].value_counts().sort_index().index)
 
 # Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -29,23 +26,21 @@ app.title='Terrorism'
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
-    dcc.Graph(id='figure-1', figure=fig),
-    html.Br(),
-    html.H3('Filter by group:'),
-    html.Br(),
     dcc.Dropdown(
         id='dropdown',
-        options=[{'label': i, 'value': i} for i in group_list]
+        options=[{'label': i, 'value': i} for i in group_list],
+        value=group_list[0]
     ),
-    dcc.Graphic(id='group-display'),
+    dcc.Graph(id='group-display'),
     html.Br(),
     html.H3('Filter by country'),
     dcc.Dropdown(
         id='dropdown1',
-        options=[{'label': i, 'value': i} for i in country_list]
+        options=[{'label': i, 'value': i} for i in country_list],
+        value=country_list[0]
     ),
     html.Br(),
-    dcc.Graphic(id='country-display'),
+    dcc.Graph(id='country-display'),
     html.Br(),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
@@ -68,14 +63,14 @@ def group_picker(group_id):
     return fig
 
 
-### app callback #1
-@app.callback(dash.dependencies.Output('group-display', 'figure'),
-              [dash.dependencies.Input('dropdown', 'value')])
-def country_picker(country_id):
-    country_df=df[df['country']==country_id]
-    fig1 = go.Figure(go.Scatter(x='date', y='total_attacks',
-            mode='lines')
-    return fig1
+# ### app callback #1
+# @app.callback(dash.dependencies.Output('country-display', 'figure'),
+#               [dash.dependencies.Input('dropdown1', 'value')])
+# def country_picker(country_id):
+#     country_df=df[df['country']==country_id]
+#     fig1 = go.Figure(go.Scatter(x='date', y='total_attacks',
+#             marker='lines')
+#     return fig1
 
 
 ######### Run the app #########
