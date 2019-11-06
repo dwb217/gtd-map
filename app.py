@@ -8,6 +8,7 @@ import pandas as pd
 import plotly as py
 import numpy as np
 import dash_table
+import plotly.express as px
 
 #import gtd data
 df = pd.read_csv('gtd.csv')
@@ -17,7 +18,8 @@ country_list = list(df['country'].value_counts().sort_index().index)
 
 df['newdate'] = pd.to_datetime(df['date'])
 df['year'] = df['newdate'].dt.year
-
+df['year'] = df['year'].astype(int)
+year_attacks = df.groupby(['year'])['eventid'].count()
 
 # Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -33,7 +35,7 @@ app.layout = html.Div(children=[
     dcc.Dropdown(
         id='dropdown_groups',
         options=[{'label': i, 'value': i} for i in group_list],
-        value=group_list[0]
+        value='Islamic State of Iraq and the Levant (ISIL)'
     ),
     dcc.Graph(id='group-display'),
     html.Br(),
@@ -48,15 +50,15 @@ app.layout = html.Div(children=[
     ),
     html.Br(),
     dcc.Graph(id='year-display'),
-    html.Br(),
-    dcc.Dropdown(
-        id='dropdown_countries',
-        options=[{'label': i, 'value': i} for i in country_list],
-        value=country_list[0]
-    ),
-    html.Br(),
-    dcc.Graph(id='country-display'),
-    html.Br(),
+    # html.Br(),
+    # dcc.Dropdown(
+    #     id='dropdown_countries',
+    #     options=[{'label': i, 'value': i} for i in country_list],
+    #     value='Iraq'
+    # ),
+    # html.Br(),
+    # dcc.Graph(id='country-display'),
+    # html.Br(),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
@@ -92,17 +94,18 @@ def year_picker(year_id):
     fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig1
 
+#
+# @app.callback(dash.dependencies.Output('country-display', 'figure'),
+#               [dash.dependencies.Input('dropdown_countries', 'value')])
+# def country_picker(country_id):
+#     country_id=df[df['country']==country_id]
+#     fig2 = go.Figure(go.Scatter(
+#             x='year',
+#             y='year_attacks',
+#             mode='lines'
+#             ))
+#     return fig2
 
-@app.callback(dash.dependencies.Output('country-display', 'figure'),
-              [dash.dependencies.Input('dropdown_countries', 'value')])
-def country_picker(country_id):
-    country_id=df[df['country']==country_id]
-    fig2 = go.Scatter(
-            x='year',
-            y='total_attacks',
-            mode='lines'
-            )
-    return fig2
 
 # ### app callback #1
 # @app.callback(dash.dependencies.Output('country-display', 'figure'),
