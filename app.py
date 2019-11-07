@@ -36,9 +36,10 @@ app.title='Terrorism'
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
-#     html.Br(),
-#     html.H5("This dataset comes from the University of Maryland's Global Terrorism Database. It identifies 116,912 attacks since 2002."),
-#     html.Br(),
+    html.Br(),
+    html.H5('This dataset comes from Global Terrorism Database, hosted at University of Maryland.'),
+    html.H5('It identifies 116,912 attacks since 2002.'),
+    html.Br(),
     html.H3('Filter by group'),
     dcc.Dropdown(
         id='dropdown_groups',
