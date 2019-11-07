@@ -8,16 +8,16 @@ import pandas as pd
 import plotly as py
 import numpy as np
 
-#import gtd data
+# import gtd data
 df = pd.read_csv('gtd.csv')
 
-#define variables
+# define variables
 total_attacks = df['eventid'].value_counts()
 group_list = list(df['group'].value_counts().sort_index().index)
 country_list = list(df['country'].value_counts().sort_index().index)
 
 
-#manipulate data
+# manipulate data
 df['newdate'] = pd.to_datetime(df['date'])
 df['year'] = df['newdate'].dt.year
 df['year'] = df['year'].astype(int)
@@ -92,7 +92,7 @@ def group_picker(group_id):
     return fig
 
 
-#app callback #2: map by year slider
+# app callback #2: map by year slider
 
 @app.callback(dash.dependencies.Output('year-display', 'figure'),
               [dash.dependencies.Input('slider', 'value')])
