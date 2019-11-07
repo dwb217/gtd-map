@@ -12,13 +12,17 @@ import plotly.express as px
 
 #import gtd data
 df = pd.read_csv('gtd.csv')
+
+#define variables
 total_attacks = df['eventid'].value_counts()
 group_list = list(df['group'].value_counts().sort_index().index)
 country_list = list(df['country'].value_counts().sort_index().index)
 
+#manipulate data
 df['newdate'] = pd.to_datetime(df['date'])
 df['year'] = df['newdate'].dt.year
 df['year'] = df['year'].astype(int)
+
 year_attacks = df.groupby(['year'])['eventid'].count()
 
 # Initiate the app
@@ -50,21 +54,12 @@ app.layout = html.Div(children=[
     ),
     html.Br(),
     dcc.Graph(id='year-display'),
-    # html.Br(),
-    # dcc.Dropdown(
-    #     id='dropdown_countries',
-    #     options=[{'label': i, 'value': i} for i in country_list],
-    #     value='Iraq'
-    # ),
-    # html.Br(),
-    # dcc.Graph(id='country-display'),
-    # html.Br(),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
 ])
 
-### app callback #1
+### app callback #1: map by group
 
 @app.callback(dash.dependencies.Output('group-display', 'figure'),
               [dash.dependencies.Input('dropdown_groups', 'value')])
@@ -80,6 +75,7 @@ def group_picker(group_id):
     return fig
 
 
+#app callback #2: map by year slider
 
 @app.callback(dash.dependencies.Output('year-display', 'figure'),
               [dash.dependencies.Input('slider', 'value')])
@@ -93,41 +89,6 @@ def year_picker(year_id):
                  )
     fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig1
-
-#
-# @app.callback(dash.dependencies.Output('country-display', 'figure'),
-#               [dash.dependencies.Input('dropdown_countries', 'value')])
-# def country_picker(country_id):
-#     country_id=df[df['country']==country_id]
-#     fig2 = go.Figure(go.Scatter(
-#             x='year',
-#             y='year_attacks',
-#             mode='lines'
-#             ))
-#     return fig2
-
-
-# ### app callback #1
-# @app.callback(dash.dependencies.Output('country-display', 'figure'),
-#               [dash.dependencies.Input('dropdown1', 'value')])
-# def country_picker(country_id):
-#     country_df=df[df['country']==country_id]
-#     fig = dash_table.DataTable(
-#             id='country',
-#             columns=[{"group": i, "killed": i} for i in df.columns],
-#             data=df.to_dict('country'),
-#         )
-#     return fig
-
-
-# ### app callback #1
-# @app.callback(dash.dependencies.Output('country-display', 'figure'),
-#               [dash.dependencies.Input('dropdown1', 'value')])
-# def country_picker(country_id):
-#     country_df=df[df['country']==country_id]
-#     fig1 = go.Figure(go.Scatter(x='date', y='total_attacks',
-#             marker='lines')
-#     return fig1
 
 
 ######### Run the app #########
