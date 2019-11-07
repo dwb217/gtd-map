@@ -7,23 +7,23 @@ import dash_html_components as html
 import pandas as pd
 import plotly as py
 import numpy as np
+import dash_table
+import plotly.express as px
 
-# import gtd data
+#import gtd data
 df = pd.read_csv('gtd.csv')
 
-# define variables
+#define variables
 total_attacks = df['eventid'].value_counts()
 group_list = list(df['group'].value_counts().sort_index().index)
 country_list = list(df['country'].value_counts().sort_index().index)
 
-
-# manipulate data
+#manipulate data
 df['newdate'] = pd.to_datetime(df['date'])
 df['year'] = df['newdate'].dt.year
 df['year'] = df['year'].astype(int)
 
 year_attacks = df.groupby(['year'])['eventid'].count()
-year_totals = df.groupby(['year'])['eventid'].count()
 
 # Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -58,19 +58,18 @@ app.layout = html.Div(children=[
     ),
     html.Br(),
     dcc.Graph(id='year-display'),
-    html.Br(),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
 ])
 
-### app callback #1 map by group
+### app callback #1: map by group
 
 @app.callback(dash.dependencies.Output('group-display', 'figure'),
               [dash.dependencies.Input('dropdown_groups', 'value')])
 def group_picker(group_id):
     group_df=df[df['group']==group_id]
-    fig = go.Figure(go.Densitymapbox(lat=group_df['latitude'], lon=group_df['longitude'], z=total_attacks, radius=10))
+    fig = go.Figure(go.Densitymapbox(lat=group_df['latitude'], lon=group_df['longitude'], z=total_attacks, radius=5))
     fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
@@ -80,7 +79,7 @@ def group_picker(group_id):
     return fig
 
 
-# app callback #2: map by year slider
+#app callback #2: map by year slider
 
 @app.callback(dash.dependencies.Output('year-display', 'figure'),
               [dash.dependencies.Input('slider', 'value')])
@@ -94,6 +93,7 @@ def year_picker(year_id):
                  )
     fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig1
+
 
 ######### Run the app #########
 if __name__ == '__main__':
