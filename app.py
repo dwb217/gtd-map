@@ -8,7 +8,7 @@ import pandas as pd
 import plotly as py
 import numpy as np
 
-# import gtd data
+########## import gtd data
 df = pd.read_csv('gtd.csv')
 
 # define variables
@@ -17,7 +17,7 @@ group_list = list(df['group'].value_counts().sort_index().index)
 country_list = list(df['country'].value_counts().sort_index().index)
 
 
-# manipulate data
+########## manipulate data
 df['newdate'] = pd.to_datetime(df['date'])
 df['year'] = df['newdate'].dt.year
 df['year'] = df['year'].astype(int)
@@ -25,14 +25,14 @@ df['year'] = df['year'].astype(int)
 year_attacks = df.groupby(['year'])['eventid'].count()
 year_totals = df.groupby(['year'])['eventid'].count()
 
-# Initiate the app
+########## Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 app.title='Terrorism'
 
 
-#### layout
+######### layout
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
@@ -64,7 +64,7 @@ app.layout = html.Div(children=[
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
 ])
 
-### app callback #1 map by group
+######### app callback 1 map by group
 
 @app.callback(dash.dependencies.Output('group-display', 'figure'),
               [dash.dependencies.Input('dropdown_groups', 'value')])
@@ -80,7 +80,7 @@ def group_picker(group_id):
     return fig
 
 
-# app callback #2: map by year slider
+########## app callback 2 map by year slider
 
 @app.callback(dash.dependencies.Output('year-display', 'figure'),
               [dash.dependencies.Input('slider', 'value')])
