@@ -24,7 +24,6 @@ df['year'] = df['year'].astype(int)
 
 year_attacks = df.groupby(['year'])['eventid'].count()
 year_totals = df.groupby(['year'])['eventid'].count()
-# year_list = list(df['year'])
 
 # Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -60,29 +59,18 @@ app.layout = html.Div(children=[
     html.Br(),
     dcc.Graph(id='year-display'),
     html.Br(),
-    # dcc.Dropdown(
-    #     id='dropdown_groups2',
-    #     options=[{'label': i, 'value': i} for i in group_list],
-    #     value='Islamic State of Iraq and the Levant (ISIL)'
-    # ),
-    # dcc.Dropdown(
-    #     id='dropdown_years2',
-    #     options=[{'label': i, 'value': i} for i in year_list],
-    #     value=2014
-    # ),
-    # dcc.Graph(id='group-year-display'),
     html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
     html.Br(),
     html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
 ])
 
-### app callback #1: map by group
+### app callback #1 map by group
 
 @app.callback(dash.dependencies.Output('group-display', 'figure'),
               [dash.dependencies.Input('dropdown_groups', 'value')])
 def group_picker(group_id):
     group_df=df[df['group']==group_id]
-    fig = go.Figure(go.Densitymapbox(lat=group_df['latitude'], lon=group_df['longitude'], z=total_attacks, radius=5))
+    fig = go.Figure(go.Densitymapbox(lat=group_df['latitude'], lon=group_df['longitude'], z=total_attacks, radius=10))
     fig.update_layout(mapbox_style="stamen-terrain",
                   mapbox_center_lon=0,
                   mapbox_center_lat=0,
@@ -106,22 +94,6 @@ def year_picker(year_id):
                  )
     fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig1
-
-# @app.callback(Output('group-year-display', 'figure'),
-#               [Input('dropdown_groups2', 'value'),
-#                Input('dropdown_years2', 'value')])
-# def year_picker(year_id, group_id):
-#     year_df=df[df['year']==year_id]
-#     group_id=df[df['group']==group_id]
-#     fig2 = go.Figure(go.Densitymapbox(lat=year_df['latitude'], lon=year_df['longitude'], z=total_attacks, radius=5))
-#     fig2.update_layout(mapbox_style="stamen-terrain",
-#                   mapbox_center_lon=0,
-#                   mapbox_center_lat=0,
-#                   mapbox_zoom=1,
-#                  )
-#     fig2.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-#     return fig2
-
 
 ######### Run the app #########
 if __name__ == '__main__':
