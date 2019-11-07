@@ -1,5 +1,6 @@
 ######### Import libraries #######
 import plotly.graph_objs as go
+from plotly.graph_objs import *
 from dash.dependencies import Input, Output, State
 import dash
 import dash_core_components as dcc
