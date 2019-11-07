@@ -37,29 +37,42 @@ app.title='Terrorism'
 
 app.layout = html.Div(children=[
     html.H1('Terrorist Attacks: 2002-2018'),
-    html.H3('Filter by group'),
-    dcc.Dropdown(
-        id='dropdown_groups',
-        options=[{'label': i, 'value': i} for i in group_list],
-        value='Islamic State of Iraq and the Levant (ISIL)'
-    ),
-    dcc.Graph(id='group-display'),
-    html.Br(),
-    html.H3('Filter by year'),
-    dcc.Slider(
-        id='slider',
-        min=2002,
-        max=2018,
-        step=1,
-        marks={i:str(i) for i in range(2002,2019)},
-        value=2002
-    ),
-    html.Br(),
-    dcc.Graph(id='year-display'),
-    html.Br(),
-    html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
-    html.Br(),
-    html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd')
+    html.Div([
+        html.H3('Filter by group'),
+        html.Div([
+            dcc.Dropdown(
+                id='dropdown_groups',
+                options=[{'label': i, 'value': i} for i in group_list],
+                value='Islamic State of Iraq and the Levant (ISIL)'
+                ),
+                ],className='five columns'),
+        html.Br(),
+        html.Br(),
+        dcc.Graph(id='group-display'),
+        ],className='ten columns'),
+    html.Div([
+        html.Br(),
+        html.H3('Filter by year'),
+        html.Div([
+            dcc.Slider(
+                id='slider',
+                min=2002,
+                max=2018,
+                step=1,
+                marks={i:str(i) for i in range(2002,2019)},
+                value=2002
+                ),
+                ],className='twelve columns'),
+        html.Br(),
+        html.Br(),
+        dcc.Graph(id='year-display'),
+        ],className='ten columns'),
+    html.Div([
+        html.Br(),
+        html.A('Code on Github', href='https://github.com/dwb217/gtd-map'),
+        html.Br(),
+        html.A('Source:', href='https://www.start.umd.edu/data-tools/global-terrorism-database-gtd'),
+        ],className='eleven columns')
 ])
 
 ######### app callback 1 map by group
@@ -74,7 +87,7 @@ def group_picker(group_id):
                   mapbox_center_lat=0,
                   mapbox_zoom=1,
                  )
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_layout(margin={"r":0,"t":0,"l":50,"b":50})
     return fig
 
 
@@ -90,7 +103,7 @@ def year_picker(year_id):
                   mapbox_center_lat=0,
                   mapbox_zoom=1,
                  )
-    fig1.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig1.update_layout(margin={"r":0,"t":0,"l":50,"b":50})
     return fig1
 
 ######### Run the app #########
