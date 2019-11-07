@@ -103,7 +103,7 @@ def year_picker(year_id):
                   mapbox_center_lat=0,
                   mapbox_zoom=1,
                  )
-    fig1.update_layout(margin={"r":0,"t":0,"l":50,"b":50})
+    fig1.update_layout(margin={"r":0,"t":0,"l":40,"b":50})
     return fig1
 
 ######### Run the app #########
