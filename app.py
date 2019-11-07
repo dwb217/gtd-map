@@ -7,8 +7,6 @@ import dash_html_components as html
 import pandas as pd
 import plotly as py
 import numpy as np
-import dash_table
-import plotly.express as px
 
 #import gtd data
 df = pd.read_csv('gtd.csv')
@@ -26,7 +24,7 @@ df['year'] = df['year'].astype(int)
 
 year_attacks = df.groupby(['year'])['eventid'].count()
 year_totals = df.groupby(['year'])['eventid'].count()
-year_list = list(df['year'])
+# year_list = list(df['year'])
 
 # Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
