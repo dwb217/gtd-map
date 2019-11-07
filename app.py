@@ -62,7 +62,7 @@ app.layout = html.Div(children=[
                 marks={i:str(i) for i in range(2002,2019)},
                 value=2002
                 ),
-                ],className='twelve columns'),
+                ],className='eleven columns'),
         html.Br(),
         html.Br(),
         dcc.Graph(id='year-display'),
